@@ -26,11 +26,11 @@ pipeline (batch in, vectors out, no streaming, no generation).
 - `process`/`thread`/`socket`/`grpc` modes, mirroring embedeer exactly.
 - Model caching under `~/.seedeer/models`, same convention as embedeer.
 
-## Phase 2 — Captioning
+## Phase 2 — Captioning ✅ done
 
 - `Captioner.caption(image)` → short text description.
-- Single small model (BLIP-class), local-or-remote per the same mode
-  options.
+- Single small model (image-to-text class, e.g. ViT-GPT2), local-or-remote
+  per the same mode options.
 - Validates the "image in, generation out" path before VQA adds the
   complexity of a question prompt.
 
