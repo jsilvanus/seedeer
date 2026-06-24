@@ -24,8 +24,6 @@ test('public API surface is exported', () => {
 });
 
 test('unimplemented pillars fail loudly, not silently', async () => {
-  await assert.rejects(() => JointEmbedder.create('any-model'), NotImplementedError);
-  await assert.rejects(() => VisualEmbedder.create('any-model'), NotImplementedError);
   await assert.rejects(() => Captioner.create('any-model'), NotImplementedError);
   await assert.rejects(() => Detector.create(), NotImplementedError);
   await assert.rejects(() => TrackingSession.create({}), NotImplementedError);

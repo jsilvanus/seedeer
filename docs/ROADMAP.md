@@ -13,7 +13,7 @@ Order chosen by: lowest architectural risk first, real-time/streaming work
   writing integration code against the real shape before models are wired
   up.
 
-## Phase 1 — Image embeddings
+## Phase 1 — Image embeddings ✅ done
 
 Lowest risk: closest in shape to embedeer's existing, proven embedding
 pipeline (batch in, vectors out, no streaming, no generation).
