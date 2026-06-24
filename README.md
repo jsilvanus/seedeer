@@ -6,12 +6,13 @@ embeddings) and [`@jsilvanus/chattydeer`](https://github.com/jsilvanus/chattydee
 (LLM chat). Import it directly with no HTTP server in the loop; local or
 remote model execution is a configuration detail, not an API difference.
 
-> **Status: Phase 3 complete.** Image embeddings (`JointEmbedder`,
-> `VisualEmbedder`), captioning (`Captioner`), and VQA (`VqaAssistant`,
-> local and remote backends) are real and working, across all four
-> execution modes (`process`/`thread`/`socket`/`grpc`) where applicable.
-> Detection/tracking is still a stub that throws `NotImplementedError`
-> pointing back to the relevant roadmap phase. See
+> **Status: Phase 4 complete.** Image embeddings (`JointEmbedder`,
+> `VisualEmbedder`), captioning (`Captioner`), VQA (`VqaAssistant`, local
+> and remote backends), and detect/track/zone-trigger (`Detector`,
+> `Tracker`, `ZoneTrigger`, `TrackingSession`) are all real and working,
+> across all four execution modes (`process`/`thread`/`socket`/`grpc`)
+> where applicable. Remaining work is Phase 5 hardening
+> (benchmarks, multi-server load balancing). See
 > [`docs/ROADMAP.md`](docs/ROADMAP.md) for what's coming and in what order,
 > and [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the design
 > principles behind it.
@@ -23,7 +24,7 @@ remote model execution is a configuration detail, not an API difference.
 | Image embeddings ✅ | Joint image-text (CLIP-class) and vision-only (DINOv2-class) embeddings | [docs/features/embeddings.md](docs/features/embeddings.md) |
 | Captioning ✅ | Cheap, fast, generic image descriptions | [docs/features/captioning.md](docs/features/captioning.md) |
 | Visual Question Answering ✅ | Question-driven answers about an image, local or delegated to a remote OpenAI-compatible vision endpoint | [docs/features/vqa.md](docs/features/vqa.md) |
-| Detect + Track + Zone-trigger | Real-time person detection, cross-frame tracking, and named-zone enter/exit events for production-assistant use cases | [docs/features/detection-tracking.md](docs/features/detection-tracking.md) |
+| Detect + Track + Zone-trigger ✅ | Real-time person detection, cross-frame tracking, and named-zone enter/exit events for production-assistant use cases | [docs/features/detection-tracking.md](docs/features/detection-tracking.md) |
 
 OCR and image redaction/pixel mutation are explicit non-goals — see
 `docs/ARCHITECTURE.md`.

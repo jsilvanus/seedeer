@@ -43,11 +43,13 @@ pipeline (batch in, vectors out, no streaming, no generation).
 - Local and remote backends must satisfy the same interface so swapping
   config doesn't change calling code.
 
-## Phase 4 — Detect + Track + Zone-trigger
+## Phase 4 — Detect + Track + Zone-trigger ✅ done
 
 Highest risk, done last, after the request/response patterns are proven.
 
-- `Detector` — per-frame bounding boxes (YOLO-nano class ONNX model).
+- `Detector` — per-frame bounding boxes (YOLOS-tiny-class ONNX model via
+  the generic object-detection pipeline, filtered to a configurable
+  label, default `'person'`).
 - `Tracker` — assigns persistent IDs across frames on top of `Detector`
   output (IOU tracker first; ByteTrack-class upgrade later if needed).
 - `ZoneTrigger` — named regions (rect/polygon) + enter/exit event emission
