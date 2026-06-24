@@ -34,7 +34,7 @@ pipeline (batch in, vectors out, no streaming, no generation).
 - Validates the "image in, generation out" path before VQA adds the
   complexity of a question prompt.
 
-## Phase 3 — Visual Question Answering
+## Phase 3 — Visual Question Answering ✅ done
 
 - `VqaAssistant.ask(image, question)` → text answer.
 - Backend abstraction: `backend: 'local'` (in-process small VLM) vs

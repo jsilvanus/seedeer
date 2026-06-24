@@ -6,11 +6,12 @@ embeddings) and [`@jsilvanus/chattydeer`](https://github.com/jsilvanus/chattydee
 (LLM chat). Import it directly with no HTTP server in the loop; local or
 remote model execution is a configuration detail, not an API difference.
 
-> **Status: Phase 2 complete.** Image embeddings (`JointEmbedder`,
-> `VisualEmbedder`) and captioning (`Captioner`) are real and working,
-> across all four execution modes (`process`/`thread`/`socket`/`grpc`).
-> VQA and detection/tracking are still stubs that throw
-> `NotImplementedError` pointing back to the relevant roadmap phase. See
+> **Status: Phase 3 complete.** Image embeddings (`JointEmbedder`,
+> `VisualEmbedder`), captioning (`Captioner`), and VQA (`VqaAssistant`,
+> local and remote backends) are real and working, across all four
+> execution modes (`process`/`thread`/`socket`/`grpc`) where applicable.
+> Detection/tracking is still a stub that throws `NotImplementedError`
+> pointing back to the relevant roadmap phase. See
 > [`docs/ROADMAP.md`](docs/ROADMAP.md) for what's coming and in what order,
 > and [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the design
 > principles behind it.
@@ -21,7 +22,7 @@ remote model execution is a configuration detail, not an API difference.
 |---|---|---|
 | Image embeddings ✅ | Joint image-text (CLIP-class) and vision-only (DINOv2-class) embeddings | [docs/features/embeddings.md](docs/features/embeddings.md) |
 | Captioning ✅ | Cheap, fast, generic image descriptions | [docs/features/captioning.md](docs/features/captioning.md) |
-| Visual Question Answering | Question-driven answers about an image, local or delegated to a remote OpenAI-compatible vision endpoint | [docs/features/vqa.md](docs/features/vqa.md) |
+| Visual Question Answering ✅ | Question-driven answers about an image, local or delegated to a remote OpenAI-compatible vision endpoint | [docs/features/vqa.md](docs/features/vqa.md) |
 | Detect + Track + Zone-trigger | Real-time person detection, cross-frame tracking, and named-zone enter/exit events for production-assistant use cases | [docs/features/detection-tracking.md](docs/features/detection-tracking.md) |
 
 OCR and image redaction/pixel mutation are explicit non-goals — see
