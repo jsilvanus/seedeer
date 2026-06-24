@@ -41,6 +41,7 @@ export class WorkerPool {
   #remoteClients = null;
   #remoteIndex = 0;
   #ready = false;
+  #initPromise = null;
 
   /**
    * @param {string} enginePath               Absolute path/module specifier for the engine module.
@@ -64,6 +65,15 @@ export class WorkerPool {
 
   async initialize() {
     if (this.#ready) return;
+    // Concurrent callers may race in before #ready flips; memoize the
+    // in-flight promise so we never spawn workers/connections twice.
+    if (!this.#initPromise) {
+      this.#initPromise = this.#doInitialize();
+    }
+    await this.#initPromise;
+  }
+
+  async #doInitialize() {
     if (this.#mode === 'process' || this.#mode === 'thread') {
       await this.#spawnLocalWorkers();
     } else if (this.#mode === 'socket') {
@@ -101,6 +111,7 @@ export class WorkerPool {
     await Promise.all(this.#workers.map((record) => this.#destroyWorker(record)));
     this.#workers = [];
     this.#ready = false;
+    this.#initPromise = null;
   }
 
   async #spawnLocalWorkers() {

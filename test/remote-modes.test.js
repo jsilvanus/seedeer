@@ -28,6 +28,35 @@ test('WorkerPool (socket mode) round-trips through socket-model-server', async (
   }
 });
 
+test('WorkerPool (socket mode) round-robins load across multiple servers', async () => {
+  const socketPathA = path.join(os.tmpdir(), `seedeer-test-lb-a-${process.pid}.sock`);
+  const socketPathB = path.join(os.tmpdir(), `seedeer-test-lb-b-${process.pid}.sock`);
+  const serverA = await startSocketServer({
+    enginePath: ECHO_ENGINE,
+    engineOptions: { greeting: 'server-a' },
+    concurrency: 1,
+    socketPath: socketPathA,
+  });
+  const serverB = await startSocketServer({
+    enginePath: ECHO_ENGINE,
+    engineOptions: { greeting: 'server-b' },
+    concurrency: 1,
+    socketPath: socketPathB,
+  });
+
+  try {
+    const pool = new WorkerPool(ECHO_ENGINE, { mode: 'socket', servers: [socketPathA, socketPathB] });
+    const results = await Promise.all(
+      Array.from({ length: 4 }, () => pool.run({ type: 'ping' })),
+    );
+    const greetings = results.map((r) => r.echoedOptions.greeting).sort();
+    assert.deepEqual(greetings, ['server-a', 'server-a', 'server-b', 'server-b']);
+    await pool.destroy();
+  } finally {
+    await Promise.all([serverA.close(), serverB.close()]);
+  }
+});
+
 test('WorkerPool (grpc mode) round-trips through grpc-model-server', async () => {
   const server = await startGrpcServer({
     enginePath: ECHO_ENGINE,

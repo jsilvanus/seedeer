@@ -60,11 +60,18 @@ Highest risk, done last, after the request/response patterns are proven.
 - `process`/`thread` local modes first (latency-critical default); `grpc`
   remote mode added for symmetry once the local path is solid.
 
-## Phase 5 — Hardening (ongoing, not blocking earlier phases)
+## Phase 5 — Hardening ✅ done
 
-- Benchmark scripts per pillar, mirroring embedeer's `bench/` directory.
-- Multi-server load balancing for embeddings/VQA/captioning (same pattern
-  as embedeer's `servers: []` option).
+- Benchmark scripts per pillar, mirroring embedeer's `bench/` directory —
+  see `bench/*.bench.js`, run via `npm run bench`.
+- Multi-server load balancing for every pillar's `socket`/`grpc` modes:
+  `WorkerPool` round-robins across `options.servers` (already wired
+  through every `*.create()` call); covered by a regression test in
+  `test/remote-modes.test.js`. While verifying this, found and fixed a
+  `WorkerPool.initialize()` race — concurrent callers before the first
+  connection settled could each open their own duplicate
+  worker/connection set, leaking sockets that made server shutdown hang.
+  `initialize()` now memoizes the in-flight setup promise.
 - Optional on-demand GPU VPS provisioning helper — explicitly a separate
   tool, not part of the seedeer package itself (see Non-goals in
   `docs/ARCHITECTURE.md`).

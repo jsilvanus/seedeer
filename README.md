@@ -6,13 +6,14 @@ embeddings) and [`@jsilvanus/chattydeer`](https://github.com/jsilvanus/chattydee
 (LLM chat). Import it directly with no HTTP server in the loop; local or
 remote model execution is a configuration detail, not an API difference.
 
-> **Status: Phase 4 complete.** Image embeddings (`JointEmbedder`,
-> `VisualEmbedder`), captioning (`Captioner`), VQA (`VqaAssistant`, local
-> and remote backends), and detect/track/zone-trigger (`Detector`,
-> `Tracker`, `ZoneTrigger`, `TrackingSession`) are all real and working,
-> across all four execution modes (`process`/`thread`/`socket`/`grpc`)
-> where applicable. Remaining work is Phase 5 hardening
-> (benchmarks, multi-server load balancing). See
+> **Status: all roadmap phases complete.** Image embeddings
+> (`JointEmbedder`, `VisualEmbedder`), captioning (`Captioner`), VQA
+> (`VqaAssistant`, local and remote backends), and detect/track/zone-trigger
+> (`Detector`, `Tracker`, `ZoneTrigger`, `TrackingSession`) are all real
+> and working, across all four execution modes
+> (`process`/`thread`/`socket`/`grpc`) where applicable, with per-pillar
+> benchmark scripts (`npm run bench`) and multi-server load balancing for
+> the network modes. See
 > [`docs/ROADMAP.md`](docs/ROADMAP.md) for what's coming and in what order,
 > and [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the design
 > principles behind it.
@@ -49,7 +50,7 @@ Full rationale in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 npm install @jsilvanus/seedeer
 ```
 
-(Not yet published — package scaffold only.)
+(Not yet published to npm.)
 
 ## License
 
