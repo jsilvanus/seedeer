@@ -1,5 +1,7 @@
 # seedeer
 
+> ⚠️ **MIGRATION NOTICE**: This repository has been migrated to the monorepo at [`jsilvanus/deer`](https://github.com/jsilvanus/deer). This repository will be archived and removed shortly. Please update your imports to use `@jsilvanus/seedeer` from the monorepo instead. Development and maintenance will continue only in the monorepo.
+
 A Node.js vision-model toolkit — the vision counterpart to
 [`@jsilvanus/embedeer`](https://github.com/jsilvanus/embedeer) (text
 embeddings) and [`@jsilvanus/chattydeer`](https://github.com/jsilvanus/chattydeer)
